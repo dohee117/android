@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\Joseph\AndroidStudioProjects\YugiohEditor\YugiohEditor\build\pre-dexed\debug\classes-c9a01355f0c996c9eed529474d2db54fe58c209a.jar"
+        jar="C:\Users\Joseph\AndroidStudioProjects\YugiohEditor\build\exploded-aar\com.android.support\appcompat-v7\19.0.1\classes.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="f71a6822470c9eb659d4f4a6cb57b780b35f058b"/>
+    <item
+        dex="C:\Users\Joseph\AndroidStudioProjects\YugiohEditor\YugiohEditor\build\pre-dexed\debug\support-v4-19.0.1-84fd55d0f12c1fe29b36c523bc6af8de079c9b0f.jar"
+        jar="C:\Program Files (x86)\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.1\support-v4-19.0.1.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd"/>
+
+</pre-dex-items>

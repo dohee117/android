@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/YugiohEditor.iml" filepath="$PROJECT_DIR$/YugiohEditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YugiohEditor/YugiohEditor-YugiohEditor.iml" filepath="$PROJECT_DIR$/YugiohEditor/YugiohEditor-YugiohEditor.iml" />
+    </modules>
+  </component>
+</project>
+
