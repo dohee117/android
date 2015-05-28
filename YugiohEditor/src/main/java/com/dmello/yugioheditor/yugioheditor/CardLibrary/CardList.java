@@ -32,8 +32,8 @@ public class CardList {
     private void addMore(Card card){
         int index = cardList.indexOf(card);
         Card cardFromList = cardList.get(index);
-        cardFromList.setCardAmount(cardFromList.getCardAmount() + card.getCardAmount());
-        cardList.set(index,cardFromList);
+        short newAmount = card.getCardAmount() + card.getCardAmount();
+        cardFromList.setCardAmount(newAmount);
     }
 
     public void add(Card card){
@@ -48,6 +48,19 @@ public class CardList {
 
     public void sort(){
         Collections.sort(cardList);
+        sanitize();
+    }
+    
+    public void sanitize(){
+        //Set last salt to -127
+        for(Card card:cardList){
+            if(card.getSalt()==-127){
+                if(cardList.indexOf(card)!=(cards.size()-1)){
+                    card.setSalt(127);
+                }
+            }
+        }
+        cardList.get(cardList.size()-1).setSalt(127);
     }
 
     public ArrayList<Card> asArrayList(){
