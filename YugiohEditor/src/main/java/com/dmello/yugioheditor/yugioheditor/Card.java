@@ -1,6 +1,8 @@
 package com.dmello.yugioheditor.yugioheditor;
 
 import android.util.Log;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * Created by Joseph on 26/05/2015.
@@ -8,13 +10,13 @@ import android.util.Log;
 public class Card implements Comparable<Card> {
 
     private byte[] cardAsBytes;
-    private int cardId;
+    private short cardId;
     private int cardAmount;
     private int salt;
 
     public byte[] getCardAsBytes() { return cardAsBytes;}
 
-    public int getCardId() {
+    public short getCardId() {
         return cardId;
     }
 
@@ -34,7 +36,7 @@ public class Card implements Comparable<Card> {
         this.salt = salt;
     }
 
-    public Card(int cardId, int cardAmount, int salt){
+    public Card(short cardId, int cardAmount, int salt){
         byte[] cardAsBytes = new byte[4];
         cardAsBytes[0] = (byte)(cardId % 256);
         cardAsBytes[1] = ((byte)((int) Math.floor(cardId/256)));
@@ -51,10 +53,12 @@ public class Card implements Comparable<Card> {
         if(cardAsBytes.length != 4){
             Log.w("Card.Card","Byte[] not long enough, size "+cardAsBytes.length);
         }else{
+            ByteBuffer bb = ByteBuffer.wrap(cardAsBytes).order(ByteOrder.LITTLE_ENDIAN);
+            
             this.cardAsBytes = cardAsBytes;
-            cardId = (cardAsBytes[0] + 128) + cardAsBytes[1]*256;
-            cardAmount = cardAsBytes[2];
-            salt = cardAsBytes[3];
+            this.cardId = bb.getShort();
+            this.cardAmount = bb.get();
+            this.salt = bb.get();
             Log.v("Card.Card","Card created from byte[] "+this + " " + bytesToString());
         }
     }
