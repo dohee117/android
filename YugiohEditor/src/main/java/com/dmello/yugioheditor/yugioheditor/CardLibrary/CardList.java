@@ -58,7 +58,7 @@ public class CardList {
                     card.setSalt(127);
             }
         }
-        cardList.get(cardList.size()-1).setSalt(127);
+        cardList.get(cardList.size()-1).setSalt(-127);
     }
 
     public ArrayList<Card> asArrayList(){
