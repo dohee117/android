@@ -32,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
     private Button listWriteButton;
     private Button addCardButton;
     private CardList cardLibrary;
+    private String appDir;
 
 
     private void listReadButtonClick(){
@@ -66,7 +67,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         //Check Environment
-        CheckEnvironment.checkDirs(this.getApplicationContext().getFilesDir().toString());
+        appDir = this.getApplicationContext().getFilesDir().toString();
+        CheckEnvironment.checkDirs(appDir);
 
         //Create Buttons and listeners
         listReadButton = (Button) findViewById(R.id.listReadButton);
