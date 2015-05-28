@@ -35,28 +35,9 @@ public class MainActivity extends ActionBarActivity {
 
 
     private void listReadButtonClick(){
-        try {
             Log.d("MainActivity.listReadButtonClick", "List Read Button");
             CardLibReader mainListReader = new CardLibReader(this.getApplicationContext().getFilesDir() + Directory.CARD_LIB.getDir() + "u00_cardlib.dat");
             cardLibrary = mainListReader.readAll();
-
-
-
-            //DELETE THIS
-            DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-            Date date = new Date();
-            String fileName = this.getApplicationContext().getFilesDir() + "readLog_"+dateFormat.format(date)+".txt";
-            BufferedWriter bos = new BufferedWriter(new FileWriter(fileName));
-
-            for(Card card:cardLibrary.asArrayList()){
-                byte[] cardBytes = card.getCardAsBytes();
-                //System.out.println(card + ": " + cardBytes[0] + ", " + cardBytes[1] + ", " + cardBytes[2] + ", " + cardBytes[3]);
-            }
-            bos.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
     }
 
     private void listWriteButtonClick(){
@@ -66,11 +47,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void addCardButtonClick(){
-        Log.d("MainActivity.addCardButtonClick","Add Card Button");
+        Log.d("MainActivity.addCardButtonClick","Add Card Button "+);
         TextView cardIdView = (TextView) findViewById(R.id.cardId);
-        int cardId = Integer.parseInt(cardIdView.getText().toString());
-        Card newCard = new Card(cardId,3,0);
-        cardLibrary.add(newCard);
+        String cardIdText = cardIdView.getText().toString();
+        if(cardIdText.equals("")){
+            Log.w("MainActivity.addCardButtonClick","Empty Card ID Field")
+        }
+        else{
+            short cardId = Short.parseShort(cardIdText);
+            Card newCard = new Card(cardId,3,0);
+            cardLibrary.add(newCard);
+        }
     }
 
     @Override
