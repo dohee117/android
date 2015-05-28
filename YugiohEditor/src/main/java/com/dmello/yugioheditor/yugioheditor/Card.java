@@ -11,8 +11,8 @@ public class Card implements Comparable<Card> {
 
     private byte[] cardAsBytes;
     private short cardId;
-    private int cardAmount;
-    private int salt;
+    private byte cardAmount;
+    private byte salt;
 
     public byte[] getCardAsBytes() { return cardAsBytes;}
 
@@ -20,28 +20,28 @@ public class Card implements Comparable<Card> {
         return cardId;
     }
 
-    public int getCardAmount() {
+    public byte getCardAmount() {
         return cardAmount;
     }
 
-    public void setCardAmount(int cardAmount) {
+    public void setCardAmount(byte cardAmount) {
         this.cardAmount = cardAmount;
     }
 
-    public int getSalt() {
+    public byte getSalt() {
         return salt;
     }
 
-    public void setSalt(int salt) {
+    public void setSalt(byte salt) {
         this.salt = salt;
     }
 
-    public Card(short cardId, int cardAmount, int salt){
+    public Card(short cardId, byte cardAmount, byte salt){
         byte[] cardAsBytes = new byte[4];
-        cardAsBytes[0] = (byte)(cardId % 256);
-        cardAsBytes[1] = ((byte)((int) Math.floor(cardId/256)));
-        cardAsBytes[2] = (byte)cardAmount;
-        cardAsBytes[3] = ((byte)0);
+        cardAsBytes[0] = (byte)(cardId & 0xff);
+        cardAsBytes[1] = (byte)((cardId >> 8) & 0xff);
+        cardAsBytes[2] = cardAmount;
+        cardAsBytes[3] = salt;
         this.cardAsBytes = cardAsBytes;
         this.cardAmount = cardAmount;
         this.salt = salt;
@@ -83,8 +83,8 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card card) {
-        Integer thisInt = cardId;
-        Integer thatInt = card.getCardId();
-        return thisInt.compareTo(thatInt);
+        Short thisShort = cardId;
+        Short thatShort = card.getCardId();
+        return thisShort.compareTo(thatShort);
     }
 }
