@@ -54,10 +54,8 @@ public class CardList {
     public void sanitize(){
         //Set last salt to -127
         for(Card card:cardList){
-            if(card.getSalt()==-127){
-                if(cardList.indexOf(card)!=(cards.size()-1)){
+            if(card.getSalt()==-127 && cardList.indexOf(card)!=(cards.size()-1)){
                     card.setSalt(127);
-                }
             }
         }
         cardList.get(cardList.size()-1).setSalt(127);
