@@ -44,11 +44,11 @@ public class CardList {
             cardList.add(card);
         }
         sort();
+        sanitize();
     }
 
     public void sort(){
         Collections.sort(cardList);
-        sanitize();
     }
     
     public void sanitize(){
