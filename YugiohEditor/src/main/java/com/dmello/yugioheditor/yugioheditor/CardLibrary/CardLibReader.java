@@ -29,7 +29,6 @@ public class CardLibReader {
             while(is.read(lineBuffer)!=-1){
                 cardLibrary.quickAdd(new Card(lineBuffer));
             }
-            cardLibrary.sort();
             is.close();
         }catch (IOException e){
             Log.e("CardLibReader.readAll","Error reading card library\n" + e.getMessage());

@@ -31,6 +31,8 @@ public class MainActivity extends ActionBarActivity {
     private Button listReadButton;
     private Button listWriteButton;
     private Button addCardButton;
+    private Button addAllButton;
+    private Button printCardsButton;
     private CardList cardLibrary;
     private String appDir;
 
@@ -39,6 +41,9 @@ public class MainActivity extends ActionBarActivity {
             Log.d("MainActivity.listReadButtonClick", "List Read Button");
             CardLibReader mainListReader = new CardLibReader(this.getApplicationContext().getFilesDir() + Directory.CARD_LIB.getDir() + "u00_cardlib.dat");
             cardLibrary = mainListReader.readAll();
+        Log.d("MainActivity.listReadButtonClick", cardLibrary.asArrayList().size() + " different cards read");
+        Log.d("MainActivity.listReadButtonClick", cardLibrary.getCardCount() + " total different cards read");
+
     }
 
     private void listWriteButtonClick(){
@@ -48,16 +53,36 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void addCardButtonClick(){
-        Log.d("MainActivity.addCardButtonClick","Add Card Button "+);
+        Log.d("MainActivity.addCardButtonClick","Add Card Button");
         TextView cardIdView = (TextView) findViewById(R.id.cardId);
         String cardIdText = cardIdView.getText().toString();
         if(cardIdText.equals("")){
-            Log.w("MainActivity.addCardButtonClick","Empty Card ID Field")
+            Log.w("MainActivity.addCardButtonClick","Empty Card ID Field");
         }
         else{
             short cardId = Short.parseShort(cardIdText);
             Card newCard = new Card(cardId,3,0);
             cardLibrary.add(newCard);
+        }
+    }
+
+    private void printCardsButtonClick(){
+        Log.d("MainActivity.printCardsButtonClick","Print Card List");
+        for(Card card:cardLibrary.asArrayList()){
+            Log.d("MainActivity.printCardsButtonClick",card.toString());
+        }
+    }
+
+    private void addAllButtonClick(){
+        Log.d("MainActivity.addAllButtonClick","Add All Button");
+        boolean first = true;
+        for(Card card:cardLibrary.asArrayList()){
+            if(first){
+                first = false;
+            }
+            else{
+                card.setCardAmount(3);
+            }
         }
     }
 
@@ -74,6 +99,8 @@ public class MainActivity extends ActionBarActivity {
         listReadButton = (Button) findViewById(R.id.listReadButton);
         listWriteButton = (Button) findViewById(R.id.listWriteButton);
         addCardButton = (Button) findViewById(R.id.addCardButton);
+        addAllButton = (Button) findViewById(R.id.addAllButton);
+        printCardsButton = (Button) findViewById(R.id.printCardsButton);
 
         listReadButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +122,21 @@ public class MainActivity extends ActionBarActivity {
                 addCardButtonClick();
             }
         });
+
+        addAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addAllButtonClick();
+            }
+        });
+
+        printCardsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                printCardsButtonClick();
+            }
+        });
+
     }
 
 

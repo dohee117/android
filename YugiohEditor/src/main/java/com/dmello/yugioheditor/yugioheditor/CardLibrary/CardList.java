@@ -26,25 +26,24 @@ public class CardList {
     }
 
     public void quickAdd(Card card){
-        cardList.add(card);
-    }
-
-    private void addMore(Card card){
-        int index = cardList.indexOf(card);
-        Card cardFromList = cardList.get(index);
-        short newAmount = card.getCardAmount() + card.getCardAmount();
-        cardFromList.setCardAmount(newAmount);
-    }
-
-    public void add(Card card){
         if(cardList.contains(card)){
             addMore(card);
         }
         else {
             cardList.add(card);
         }
+    }
+
+    private void addMore(Card card){
+        int index = cardList.indexOf(card);
+        Card cardFromList = cardList.get(index);
+        int newAmount = card.getCardAmount() + card.getCardAmount();
+        cardFromList.setCardAmount(newAmount);
+    }
+
+    public void add(Card card){
+        quickAdd(card);
         sort();
-        sanitize();
     }
 
     public void sort(){
@@ -54,7 +53,7 @@ public class CardList {
     public void sanitize(){
         //Set last salt to -127
         for(Card card:cardList){
-            if(card.getSalt()==-127 && cardList.indexOf(card)!=(cards.size()-1)){
+            if(card.getSalt()==-127 && cardList.indexOf(card)!=(cardList.size()-1)){
                     card.setSalt(127);
             }
         }
@@ -65,4 +64,12 @@ public class CardList {
         return cardList;
     }
 
+
+    public int getCardCount(){
+        int cardCount = -1;
+        for(Card card:cardList){
+            cardCount += card.getCardAmount();
+        }
+        return cardCount;
+    }
 }

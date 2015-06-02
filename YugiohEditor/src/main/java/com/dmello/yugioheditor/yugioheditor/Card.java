@@ -11,8 +11,8 @@ public class Card implements Comparable<Card> {
 
     private byte[] cardAsBytes;
     private short cardId;
-    private byte cardAmount;
-    private byte salt;
+    private int cardAmount;
+    private int salt;
 
     public byte[] getCardAsBytes() { return cardAsBytes;}
 
@@ -20,28 +20,28 @@ public class Card implements Comparable<Card> {
         return cardId;
     }
 
-    public byte getCardAmount() {
+    public int getCardAmount() {
         return cardAmount;
     }
 
-    public void setCardAmount(byte cardAmount) {
+    public void setCardAmount(int cardAmount) {
         this.cardAmount = cardAmount;
     }
 
-    public byte getSalt() {
+    public int getSalt() {
         return salt;
     }
 
-    public void setSalt(byte salt) {
+    public void setSalt(int salt) {
         this.salt = salt;
     }
 
-    public Card(short cardId, byte cardAmount, byte salt){
+    public Card(short cardId, int cardAmount, int salt){
         byte[] cardAsBytes = new byte[4];
         cardAsBytes[0] = (byte)(cardId & 0xff);
         cardAsBytes[1] = (byte)((cardId >> 8) & 0xff);
-        cardAsBytes[2] = cardAmount;
-        cardAsBytes[3] = salt;
+        cardAsBytes[2] = (byte)cardAmount;
+        cardAsBytes[3] = (byte)salt;
         this.cardAsBytes = cardAsBytes;
         this.cardAmount = cardAmount;
         this.salt = salt;
